@@ -82,7 +82,8 @@ import java.io.IOException;
 %function nextToken
 %type Token
 
-
+LPAREN = "("
+RPAREN = ")"
 SEMI = ";" // Definan aqui sus Tokens/ER por ejemplo: "el token SEMI"
 WHITE = (" "|\t|\n)
 signo   = [+-]
@@ -95,10 +96,11 @@ NUMBER = {digitos}+({punto}?{digitos}*)?({exponente}{signo}?{digitos}+)?
 
 <YYINITIAL>{SEMI} { 
     return new Token(Token.SEMI);   
-    }
+}
 <YYINITIAL>{NUMBER} {
     return new Token(Token.NUMBER, yytext());
 }
+
 <YYINITIAL>[+] {
     return new Token(Token.PLUS);
 }
@@ -114,13 +116,13 @@ NUMBER = {digitos}+({punto}?{digitos}*)?({exponente}{signo}?{digitos}+)?
 <YYINITIAL>[%] {
     return new Token(Token.MOD);
 }
-<YYINITIAL>[^] {
+<YYINITIAL>"^" {
     return new Token(Token.EXP);
-} 
-<YYINITIAL>[(] {
+}
+<YYINITIAL>{LPAREN} {
     return new Token(Token.LPAREN);
 }
-<YYINITIAL>[)] {
+<YYINITIAL>{RPAREN} {
     return new Token(Token.RPAREN);
 }
 <YYINITIAL>[~] {

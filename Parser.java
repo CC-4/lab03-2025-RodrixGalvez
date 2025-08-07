@@ -134,6 +134,77 @@ public class Parser {
     }
 
     private boolean E() {
+        if(T() && Ep()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean Ep(){
+        int save = next;
+        if(term(Token.PLUS) && T() && Ep()){
+            return true;
+        }
+        next = save;
+        if(term(Token.MINUS) && T() && Ep()){
+            return true;
+        }
+        next = save;
+        return true;
+    }
+
+    private boolean T(){
+        if(P() && Tp())
+        {
+            return true;
+        }
+        return false;
+    }
+    private boolean Tp(){
+        int save = next;
+        if(term(Token.MULT) && P() && Tp()){
+            return true;
+        }
+        next = save;
+        if(term(Token.DIV) && P() && Tp()){
+            return true;
+        }
+        next = save;
+        if(term(Token.MOD) && P() && Tp()){
+            return true;
+        }
+        next = save;
+        return true;
+    }
+    private boolean P(){
+        if(F() && Pp()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean Pp(){
+        int save = next;
+        if(term(Token.EXP) && F() && Pp()){
+            return true;
+        }
+        next = save;
+        return true;
+    }
+    private boolean F() {
+        int save = next;
+        if(term(Token.MINUS) && F()){
+            return true;
+        }
+        next = save;
+        if(term(Token.LPAREN) && E() && term(Token.RPAREN)){
+            return true;
+        }
+        next = save;
+        if(term(Token.NUMBER)){
+            return true;
+        }
+        next = save;
         return false;
     }
 

@@ -257,20 +257,26 @@ public class Lexer {
 		/* 7 */ YY_NO_ANCHOR,
 		/* 8 */ YY_NO_ANCHOR,
 		/* 9 */ YY_NO_ANCHOR,
-		/* 10 */ YY_NOT_ACCEPT,
+		/* 10 */ YY_NO_ANCHOR,
 		/* 11 */ YY_NO_ANCHOR,
-		/* 12 */ YY_NOT_ACCEPT,
-		/* 13 */ YY_NO_ANCHOR
+		/* 12 */ YY_NO_ANCHOR,
+		/* 13 */ YY_NO_ANCHOR,
+		/* 14 */ YY_NO_ANCHOR,
+		/* 15 */ YY_NOT_ACCEPT,
+		/* 16 */ YY_NO_ANCHOR,
+		/* 17 */ YY_NOT_ACCEPT,
+		/* 18 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
-"10:37,9,10:4,7,6,10,5,3,8,2:10,10,1,10:9,4,10:31,4,10:18,7,10:7,0:2")[0];
+"15:9,14:2,15:2,0,15:18,14,15:4,9,15:2,11,12,15,6,15,5,3,8,2:10,15,1,15:9,4," +
+"15:24,10,15:6,4,15:18,7,15:5,13,15,16:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,14,
-"0,1:2,2,1:6,3,4,5:2")[0];
+	private int yy_rmap[] = unpackFromString(1,19,
+"0,1,2,1:12,3,4,5:2")[0];
 
-	private int yy_nxt[][] = unpackFromString(6,11,
-"1,2,3,4:2,5,6,7,8,9,4,-1:13,3,11,10,-1:8,13,-1:2,12:2,-1:6,11,-1,10,-1:8,13" +
-",-1:8");
+	private int yy_nxt[][] = unpackFromString(6,17,
+"-1,1,2,3:2,4,5,6,7,8,9,10,11,12,13,3,14,-1:19,2,16,15,-1:14,18,-1:2,17:2,-1" +
+":12,16,-1,15,-1:14,18,-1:14");
 
 	public Token nextToken ()
 		throws java.io.IOException {
@@ -317,68 +323,100 @@ public class Lexer {
 					yy_to_mark();
 					switch (yy_last_accept_state) {
 					case 1:
-						
+						{ 
+    return new Token(Token.SEMI);   
+}
 					case -2:
 						break;
 					case 2:
-						{ 
-    return new Token(Token.SEMI);   
-    }
-					case -3:
-						break;
-					case 3:
 						{
     return new Token(Token.NUMBER, yytext());
 }
+					case -3:
+						break;
+					case 3:
+						{ 
+    return new Token(Token.ERROR);
+    /* todo lo demas es ERROR */ }
 					case -4:
 						break;
 					case 4:
 						{
-    return new Token(Token.EXP);
+    return new Token(Token.MINUS);
 }
 					case -5:
 						break;
 					case 5:
 						{
-    return new Token(Token.MINUS);
+    return new Token(Token.PLUS);
 }
 					case -6:
 						break;
 					case 6:
 						{
-    return new Token(Token.PLUS);
+    return new Token(Token.MULT);
 }
 					case -7:
 						break;
 					case 7:
 						{
-    return new Token(Token.MULT);
+    return new Token(Token.DIV);
 }
 					case -8:
 						break;
 					case 8:
 						{
-    return new Token(Token.DIV);
+    return new Token(Token.MOD);
 }
 					case -9:
 						break;
 					case 9:
 						{
-    return new Token(Token.MOD);
+    return new Token(Token.EXP);
 }
 					case -10:
 						break;
-					case 11:
+					case 10:
 						{
-    return new Token(Token.NUMBER, yytext());
+    System.out.println("Reconocido: LPAREN");
+    return new Token(Token.LPAREN);
 }
 					case -11:
 						break;
+					case 11:
+						{
+    System.out.println("Reconocido: RPAREN");
+    return new Token(Token.RPAREN);
+}
+					case -12:
+						break;
+					case 12:
+						{
+    return new Token(Token.UNARY);
+}
+					case -13:
+						break;
 					case 13:
+						{ 
+    /* NO HACER NADA */            
+    }
+					case -14:
+						break;
+					case 14:
+						
+					case -15:
+						break;
+					case 16:
 						{
     return new Token(Token.NUMBER, yytext());
 }
-					case -12:
+					case -16:
+						break;
+					case 18:
+						{
+    return new Token(Token.NUMBER, yytext());
+}
+					case -17:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
